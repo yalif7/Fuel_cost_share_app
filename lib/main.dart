@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'widgets/tip_slider.dart';
 import 'widgets/traveller_counter.dart';
 
 void main() {
@@ -170,35 +171,14 @@ class _FgiftState extends State<Fgift> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text(
-                              'Tip',
-                              style: TextStyle(fontSize: 22),
-                            ),
-                            Text(
-                              '${(_giftPercentage * 100).round()}',
-                              style: const TextStyle(fontSize: 22),
-                            ),
-                          ],
+                        child: TipSlider(
+                          giftPercentage: _giftPercentage,
+                          onChanged: (double value) {
+                            setState(() {
+                              _giftPercentage = value;
+                            });
+                          },
                         ),
-                      ),
-                      const SizedBox(height: 8),
-                      Slider(
-                        value: _giftPercentage,
-                        min: 0,
-                        max: 1,
-                        divisions: 10,
-                        activeColor: const Color(0xFF8B4F34),
-                        inactiveColor: const Color(0xFFD8B5A1),
-                        thumbColor: const Color(0xFF8B4F34),
-                        label: '${(_giftPercentage * 100).round()}%',
-                        onChanged: (double value) {
-                          setState(() {
-                            _giftPercentage = value;
-                          });
-                        },
                       ),
                     ],
                   ),
