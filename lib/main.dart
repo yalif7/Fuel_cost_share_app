@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'widgets/fuel_cost_input.dart';
 import 'widgets/tip_slider.dart';
 import 'widgets/traveller_counter.dart';
 
@@ -98,34 +99,14 @@ class _FgiftState extends State<Fgift> {
                   ),
                 ),
                 const SizedBox(height: 18),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
-                      color: const Color(0xFFB56D55),
-                      width: 2,
-                    ),
-                  ),
-                  child: TextField(
-                    controller: _fuelController,
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Enter Fuel Cost',
-                      hintStyle: TextStyle(
-                        color: Color(0xFF5B453F),
-                        fontSize: 18,
-                      ),
-                    ),
-                    keyboardType: TextInputType.number,
-                    style: const TextStyle(fontSize: 18),
-                    onChanged: (String value) {
-                      final parsed = double.tryParse(value) ?? 0.0;
-                      setState(() {
-                        _fuelCost = parsed;
-                      });
-                    },
-                  ),
+                FuelCostInput(
+                  controller: _fuelController,
+                  onChanged: (String value) {
+                    final parsed = double.tryParse(value) ?? 0.0;
+                    setState(() {
+                      _fuelCost = parsed;
+                    });
+                  },
                 ),
                 const SizedBox(height: 16),
                 Container(
