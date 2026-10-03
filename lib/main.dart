@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'widgets/fuel_cost_input.dart';
-import 'widgets/tip_slider.dart';
+import 'widgets/split_and_tip_card.dart';
 import 'widgets/total_per_traveller.dart';
-import 'widgets/traveller_counter.dart';
 
 void main() {
   runApp(const MyApp());
@@ -87,60 +86,27 @@ class _FgiftState extends State<Fgift> {
                   },
                 ),
                 const SizedBox(height: 16),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
-                      color: const Color(0xFFB56D55),
-                      width: 2,
-                    ),
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            'Split',
-                            style: TextStyle(fontSize: 22),
-                          ),
-                          TravellerCounter(
-                            theme: theme,
-                            personCount: _personCount,
-                            onDecrement: () {
-                              setState(() {
-                                if (_personCount > 1) {
-                                  _personCount--;
-                                }
-                              });
-                            },
-                            onIncrement: () {
-                              setState(() {
-                                _personCount++;
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-                      const Divider(
-                        height: 1,
-                        thickness: 1,
-                        color: Color(0xFFB56D55),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
-                        child: TipSlider(
-                          giftPercentage: _giftPercentage,
-                          onChanged: (double value) {
-                            setState(() {
-                              _giftPercentage = value;
-                            });
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
+                SplitAndTipCard(
+                  personCount: _personCount,
+                  giftPercentage: _giftPercentage,
+                  theme: theme,
+                  onDecrement: () {
+                    setState(() {
+                      if (_personCount > 1) {
+                        _personCount--;
+                      }
+                    });
+                  },
+                  onIncrement: () {
+                    setState(() {
+                      _personCount++;
+                    });
+                  },
+                  onTipChanged: (double value) {
+                    setState(() {
+                      _giftPercentage = value;
+                    });
+                  },
                 ),
               ],
             ),
